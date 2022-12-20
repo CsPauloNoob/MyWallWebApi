@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyWallWebApi.Insfrastructure.Data.Contexts;
 using MyWallWebApi.Models;
 
 namespace MyWallWebApi.Insfrastructure.Data.Repositories
@@ -37,13 +38,9 @@ namespace MyWallWebApi.Insfrastructure.Data.Repositories
         public async Task<Post> NewPost(Post post)
         {
 
-            var countId = await _context.Post.CountAsync();
-
             var ret = await _context.Post.AddAsync(post);
 
             await _context.SaveChangesAsync();
-
-            ret.State = EntityState.Detached;
 
             return ret.Entity;
         }

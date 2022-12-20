@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using MyWallWebApi;
+using MyWallWebApi.Domains.Services;
+using MyWallWebApi.Insfrastructure.Data.Contexts;
+using MyWallWebApi.Insfrastructure.Data.Repositories;
 using MyWallWebApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,8 @@ builder.Services.AddControllers();
 string stringsqlite = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<SqliteContext>(options => options.UseSqlite(stringsqlite));
+builder.Services.AddScoped<PostRepository>();
+builder.Services.AddScoped<PostService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
