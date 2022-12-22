@@ -1,4 +1,4 @@
-namespace MyWallWebApi
+namespace MyWallWebApi.Domains.Models
 {
     public class WeatherForecast
     {
