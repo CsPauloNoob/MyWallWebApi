@@ -53,6 +53,8 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<PostRepository>();
 builder.Services.AddScoped<PostService>();
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<AuthService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
