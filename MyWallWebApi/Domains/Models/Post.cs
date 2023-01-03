@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MyWallWebApi.Domains.Models;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MyWallWebApi.Models
 {
@@ -12,5 +15,11 @@ namespace MyWallWebApi.Models
         public string Content { get; set; }
 
         public DateTime CreatedDate { get; set; }
+
+
+
+        public string ApplicationUserId { get; set; }
+
+        public ApplicationUser ApplicationUser { get;}
     }
 }

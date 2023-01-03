@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyWallWebApi.Domains.Models;
 using MyWallWebApi.Insfrastructure.Data.Contexts;
 using MyWallWebApi.Models;
 
@@ -18,17 +19,23 @@ namespace MyWallWebApi.Insfrastructure.Data.Repositories
         
         public async Task<List<Post>> ListPosts()
         {
-            List<Post> list = await _context.Post.ToListAsync();
+            List<Post> list = await _context.Post.OrderBy(date => date.CreatedDate).ToListAsync();
+
+            return list;
+        }
+
+        public async Task<List<Post>> ListPostsByUserId(string applicationUserId)
+        {
+            List<Post> list = await _context.Post.Where(user => user.ApplicationUserId == applicationUserId)
+                .OrderBy(date => date.CreatedDate).ToListAsync();
 
             return list;
         }
 
 
-
-        
         public async Task<Post> GetPost(int postId)
         {
-            Post? post = await _context.Post.FindAsync(postId);
+            Post? post = await _context.Post.Include(p => p.ApplicationUser).FirstAsync(p => p.Id == postId);
 
             return post;
         }

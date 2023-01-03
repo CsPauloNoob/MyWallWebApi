@@ -21,7 +21,7 @@ namespace MyWallWebApi.Controllers
         }
 
 
-
+        [AllowAnonymous]
         [HttpGet("list-posts")]
         public async Task<ActionResult> ListPosts()
         {
@@ -31,7 +31,15 @@ namespace MyWallWebApi.Controllers
         }
 
 
+        [HttpGet("list-my-posts")]
+        public async Task<ActionResult> ListMyPosts()
+        {
+            List<Post> list = await _postService.ListUserPosts();
 
+            return Ok(list);
+        }
+
+        [AllowAnonymous]
         [HttpGet("get-post")]
         public async Task<ActionResult> GetPost([FromQuery] int postId)
         {
@@ -47,7 +55,7 @@ namespace MyWallWebApi.Controllers
         }
 
 
-
+        [AllowAnonymous]
         [HttpPost("new-post")]
         public async Task<ActionResult> NewPost(Post post)
         {
